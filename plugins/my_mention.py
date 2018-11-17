@@ -26,14 +26,14 @@ def get_start_end_dates(year, week):
 def default_func(message):
     message.reply('ゴミ')
 
-@respond_to('今週のゴミ')
+@listen_to('今週のゴミ')
 def mention_func(message):
     today = datetime.now()
     today_calender = today.isocalendar()
     duty_index = today_calender[2] % 4
     message.reply('今週のゴミ担当は ' + duty_dic[duty_index] + ' です')
 
-@respond_to('今月のゴミ')
+@listen_to('今月のゴミ')
 def mention_func(message):
     day_of_month = datetime.now().day
     week_number = (day_of_month - 1) % 7
@@ -46,4 +46,4 @@ def mention_func(message):
     for w in range(1, week_number + 1):
         current_week = w + first_day_calender[1]
         duty_index = (current_week - 1) % 4
-        message.reply(str(w)+ '週目' + get_start_end_dates(today_calender[0], current_week)+ 'のゴミ担当は' +duty_dic[duty_index]+ 'です')
+        message.reply(str(w)+ ' 週目 ' + get_start_end_dates(today_calender[0], current_week)+ 'のゴミ担当は' +duty_dic[duty_index]+ 'です')
