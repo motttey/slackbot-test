@@ -104,4 +104,4 @@ venv.bak/
 .mypy_cache/
 
 # settings
-slackbot_settings.py
+.slackbot_settings.py

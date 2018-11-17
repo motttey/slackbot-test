@@ -11,10 +11,11 @@ from math import ceil
 import calendar
 
 duty_dic = { 0:'B4', 1:'M1', 2:'M2', 3:'Doctor'}
+part_num = 4
 
 def get_start_end_dates(year, week):
     d = date(year,1,1)
-    if(d.weekday()<= 3):
+    if (d.weekday() <= 3):
         d = d - timedelta(d.weekday())
     else:
         d = d + timedelta(7-d.weekday())
@@ -27,15 +28,15 @@ def get_start_end_dates(year, week):
 def mention_func(message):
     message.reply('ゴミ')
 
-@listen_to('今週のゴミ')
-def listen_func(message):
+@respond_to('今週のゴミ')
+def mention_func(message):
     today = datetime.now()
     today_calender = today.isocalendar()
-    duty_index = today_calender[2] % 4
+    duty_index = (today_calender[1] - 1) % part_num
     message.send('今週のゴミ担当は ' + duty_dic[duty_index] + ' です')
 
-@listen_to('今月のゴミ')
-def listen_func(message):
+@respond_to('今月のゴミ')
+def mention_func(message):
     first_day = date.today().replace(day=1)
 
     today = datetime.today()
@@ -47,5 +48,5 @@ def listen_func(message):
 
     for w in range(1, week_number + 1):
         current_week = w + first_day_calender[1]
-        duty_index = (current_week - 1) % 4
+        duty_index = (current_week - 1) % part_num
         message.send(str(w)+ ' 週目 ' + get_start_end_dates(today_calender[0], current_week)+ 'のゴミ担当は' +duty_dic[duty_index]+ 'です')
