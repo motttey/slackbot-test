@@ -4,6 +4,7 @@
 # 定期的に通知
 - 以下のスクリプトを用いて, Google App Scriptから定期実行する
 - メッセージに基づきgarbage-notification botが発火
+- TODO: デプロイ先の変更
 
 ```ruby:qiita.rb
 var postUrl = 'Incoming WebhooksのURL';
